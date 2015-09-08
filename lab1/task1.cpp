@@ -11,10 +11,10 @@ int main()
     friendslist.open("list.txt");
     string nextname = "111";
     int nextage;
-    while (nextname.compare("000")!=0){
+    while (nextname.compare("exit")!=0){
 	cout << endl << "Input friend's name: ";
 	cin >> nextname;
-	if (nextname.compare("000")==0){
+	if (nextname.compare("exit")==0){
 	    break;
 	    }
 	friendslist << nextname;
@@ -22,5 +22,6 @@ int main()
 	cin >> nextage;
 	friendslist << "\t" << nextage << endl;
 	}
+    friendlist.close();
     return 0;
 }
