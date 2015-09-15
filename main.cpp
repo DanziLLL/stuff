@@ -9,13 +9,14 @@ int main() {
     cout << "Input some friends, if there's no more - type \"exit\"" << endl;
     friendslist.open("list.txt");
     string nextname = "111";
-    int nextage, normal, blacklisted;
+    int nextage, normal, blacklisted, total = 0;
     while (nextname.compare("exit") != 0) {
         cout << endl << "Input friend's name: ";
         cin >> nextname;
         if (nextname.compare("exit") == 0) {
             break;
         }
+        total++;
         friendslist << nextname;
         cout << "Input friend's age: ";
         cin >> nextage;
@@ -32,16 +33,9 @@ int main() {
         };
         int i = 0;
         char nextline[30];
-        /*while (!blacklist.eof()){
-            blacklist.getline(nextline, 255, '\n');
-            for (i = 0; i < )
-        }
-        entry allentries[];
-
-        while (!blacklist.eof()) {
-            while ()
-        }
-    }*/
+        entry allentries[total];
+        while (!blacklist.eof()){
+    }
         friendslist.close();
         return 0;
     }
