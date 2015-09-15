@@ -26,17 +26,18 @@ int main() {
     cout << "Do you want to generate blacklist? (y/n)" << endl;
     cin >> nextname;
     if (nextname.compare("y" == 0)) {
-        fstream blacklist("test.txt", fstream::in | fstream::out);
+        fstream blacklist("list.txt", fstream::in | fstream::out);
         struct entry {
             string name;
             int age;
         };
         int i = 0;
-        char nextline[30];
         entry allentries[total];
-        while (!blacklist.eof()){
+        while (i < total){
+            blacklist >> allentries[i].name;
+            blacklist >> allentries[i].age;
+            i++;
+        }
     }
-        friendslist.close();
-        return 0;
-    }
+    return 0;
 }
