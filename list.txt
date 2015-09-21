@@ -1,2 +1,9 @@
-qwe	43
-asd	12
+qwe	12
+asd	3
+asdc	44
+asdwr	421
+===BLACKLIST===
+qwe	12
+asd	3
+Total: 4
+Blacklisted: 2
