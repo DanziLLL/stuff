@@ -27,10 +27,18 @@ public:
             pointer[i] = rand() % 100;
         }
     }
+    IntegerArray(const IntegerArray &object){
+        _size = object._size;
+        pointer = new int [_size];
+        for (int i = 0; i < _size; i++) {
+            pointer[i] = object.pointer[i];
+        }
+    }
     void PrintArray(){
         for (int i = 0; i < _size; i++) {
-            cout << pointer[i] << endl;
+            cout << pointer[i] << "\t";
         }
+        cout << endl;
     }
     void MinMax(){
         int min = 101, max = 0;
@@ -45,11 +53,28 @@ public:
         cout << "Min: " << min << endl;
         cout << "Max: " << max << endl;
     }
+    void CopyCheck(){
+        for (int i = 0; i < _size; i++) {
+            pointer[i]++;
+        }
+    }
 };
 
 int main() {
-    IntegerArray test(15);
-    test.PrintArray();
-    test.MinMax();
+    IntegerArray test_default;
+    IntegerArray test_resizable(15);
+    cout << "===WORKING WITH DEFAULT CONSTRUCTOR===" << endl;
+    test_default.PrintArray();
+    test_default.MinMax();
+    cout << "===WORKING WITH RESIZABLE CONSTRUCTOR===" << endl;
+    test_resizable.PrintArray();
+    test_resizable.MinMax();
+    cout << "===WORKING WITH RESIZABLE CONSTRUCTOR'S OBJECT COPY===" << endl;
+    IntegerArray copy(test_resizable);
+    copy.CopyCheck();
+    copy.PrintArray();
+    copy.MinMax();
+    cout << "===RESIZABLE OBJECT CHECK===" << endl;
+    test_resizable.PrintArray();
     return 0;
 }
