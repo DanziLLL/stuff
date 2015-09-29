@@ -77,7 +77,7 @@ public:
 int IntegerArray::count = 0;
 int main() {
     int size = 13;
-    int arr[size] = {3,2,5,1,2,5,7,4,8,5,7,2,5};
+    int arr[13] = {3,2,5,1,2,5,7,4,8,5,7,2,13};
     IntegerArray test_default;
     IntegerArray test_resizable(15);
     cout << "===WORKING WITH DEFAULT CONSTRUCTOR===" << endl;
