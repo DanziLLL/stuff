@@ -12,7 +12,12 @@ public:
     IntegerArray <Array> () {
         int size = 10;
         _size = size;
-        pointer = new Array[size];
+        try{
+            pointer = new Array[size];
+        }
+        catch (bad_alloc &ba){
+            cout << "Allocation error";
+        }
         for (int i = 0; i < size; i++) {
             pointer[i] = rand() % 100;
         }
@@ -33,7 +38,12 @@ public:
         catch (string err){
             cout << err << endl << endl;
         }
-        pointer = new Array[size];
+        try{
+            pointer = new Array[size];
+        }
+        catch (bad_alloc &ba){
+            cout << "Allocation error";
+        }
         for (int i = 0; i < size; i++) {
             pointer[i] = rand() % 100;
         }
@@ -41,7 +51,12 @@ public:
 
     IntegerArray <Array> (int size, Array *arr) {
         _size = size;
-        pointer = new int[size];
+        try{
+            pointer = new Array[size];
+        }
+        catch (bad_alloc &ba){
+            cout << "Allocation error";
+        }
         for (int i = 0; i < size; i++) {
             pointer[i] = arr[i];
         }
@@ -49,7 +64,12 @@ public:
 
     IntegerArray <Array> (const IntegerArray &object) {
         _size = object._size;
-        pointer = new Array[_size];
+        try{
+            pointer = new Array[_size];
+        }
+        catch (bad_alloc &ba){
+            cout << "Allocation error";
+        }
         for (int i = 0; i < _size; i++) {
             pointer[i] = object.pointer[i];
         }
@@ -123,6 +143,15 @@ public:
     }
 
     bool operator==(IntegerArray<Array> &arr2){
+        try{
+            if (_size != arr2._size){
+                string err("Array size mismatch!");
+                throw err;
+            }
+        }
+        catch (string err){
+            cout << err << endl;
+        }
         if (_size == arr2._size) {
             for (int i = 0; i < _size; i++) {
                 if (pointer[i] != arr2.pointer[i]){
@@ -143,6 +172,30 @@ public:
             return false;
         }
     }
+    friend istream &operator>>(istream &stream, IntegerArray<Array> arr){
+        for (int i = 0; i < arr._size; i++) {
+            try {
+                stream >> arr.pointer[i];
+                if (cin.good() == 0){
+                    string err("Bad input!");
+                    cin.clear();
+                    throw err;
+                }
+            }
+            catch (string err){
+                cout << err << endl;
+                cin.clear();
+                }
+            continue;
+        }
+    }
+
+    friend ostream & operator<<(ostream &stream, IntegerArray<Array> &arr){
+        for (int i = 0; i < arr._size; i++) {
+            stream << arr.pointer[i] << "\t";
+        }
+        return (stream << endl);
+    }
 };
 
 int main() {
@@ -152,32 +205,35 @@ int main() {
     IntegerArray<int> int_test;
     IntegerArray<int> int_test_copy(int_test);
     int_test.Sort();
-    int_test.PrintArray();
+    cout << int_test;
     int_test.MinMax();
     cout << "Creating long-type object..." << endl;
     IntegerArray<long> long_test;
     long_test.Sort();
-    long_test.PrintArray();
+    cout << long_test;
     long_test.MinMax();
     cout << "Creating double-type object..." << endl;
     IntegerArray<double> double_test;
     double_test.Sort();
-    double_test.PrintArray();
+    cout << double_test;
     double_test.MinMax();
     cout << "Creating short-type object..." << endl;
     IntegerArray<short> short_test;
     short_test.Sort();
-    short_test.PrintArray();
+    cout << short_test;
     short_test.MinMax();
     cout << "Overloading \"=\"..." << endl;
     IntegerArray<short> short_test_copy;
     short_test_copy = short_test;
-    short_test_copy.PrintArray();
+    cout << short_test_copy;
     cout << endl << "Overloading \"int_test[5]\" and testing out-of-bounds exception..." << endl;
     int_test.PrintArray();
     cout << "int_test[5] = " << int_test[5] << endl;
     cout << "int_test[1000]: ";
     int_test[1000];
+    cout << "Let's check \">>\" overload. Input any different number for int_test[5]" << endl;
+    cin >> int_test[5];
+    cout << "int_test[5] = " << int_test[5] << endl;
     cout << endl <<"Overloading \"==\"..." << endl;
     if (bool check = short_test==short_test_copy){
         cout << "Comparing equal arrays: ";
