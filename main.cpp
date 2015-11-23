@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <set>
-#include <bits/stl_vector.h>
+#include <vector>
 
 using namespace std;
 
