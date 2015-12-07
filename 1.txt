@@ -2,4 +2,3 @@ C++
 has
 was
 with
-language
